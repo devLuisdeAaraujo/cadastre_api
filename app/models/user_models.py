@@ -29,7 +29,7 @@ class User(Document):
 def create(self) -> datetime:
     return self.id.generation_time
 @classmethod
-async def by_email(self,email:str)-> "User":
+async def by_email(self,email:str)-> User:
     return await self.find_one(self.email == email)
 
 

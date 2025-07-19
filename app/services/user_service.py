@@ -2,7 +2,7 @@ from schemas.user_schemas import UserAuth
 from models.user_models import User
 from core.security import get_password,verify_password
 from typing import Optional
-
+from uuid import UUID
 class UserService:
     @staticmethod
     async def create_user(user: UserAuth):
@@ -13,6 +13,11 @@ class UserService:
         )
         await usuario.save()
         return usuario
+    
+    @staticmethod
+    async def get_user_by_id(id:UUID)-> Optional[User]:
+        user = await User.find_onte(User.user_id == id)
+        return user
     @staticmethod
     async def get_user_by_email(email:str) -> Optional[User]:
         user = await User.find_one(User.email == email)
